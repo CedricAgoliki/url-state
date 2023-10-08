@@ -1,8 +1,8 @@
-type StateType = Map<string, string | string[]>;
+type URLStateType = Map<string, string | string[]>;
 
 const separator = ",";
 
-const set = (state: StateType): void => {
+const set = (state: URLStateType): void => {
   const searchParams = new URLSearchParams();
   state.forEach((value, key) => {
     if (Array.isArray(value)) {
@@ -13,13 +13,13 @@ const set = (state: StateType): void => {
   });
   const newURL = new URL(globalThis.location.href);
   newURL.search = searchParams.toString();
-  globalThis.history.pushState({ path: newURL.href }, "", newURL.href);
+  window.history.pushState({ path: newURL.href }, "", newURL.href);
 };
 
-const get = (): StateType => {
-  const search = globalThis.location.search;
+const get = (): URLStateType => {
+  const search = window.location.search;
   const searchParams = new URLSearchParams(search);
-  const state: StateType = new Map();
+  const state: URLStateType = new Map();
   searchParams.forEach((value, key) => {
     if (value.includes(separator)) {
       state.set(key, value.split(separator));
@@ -30,4 +30,7 @@ const get = (): StateType => {
   return state;
 };
 
-export { get, set };
+const map: URLStateType = new Map();
+
+
+export { set, get };
