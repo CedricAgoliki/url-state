@@ -30,7 +30,4 @@ const get = (): URLStateType => {
   return state;
 };
 
-const map: URLStateType = new Map();
-
-
 export { set, get };
