@@ -1,4 +1,4 @@
-type URLStateType = Map<string, string | string[]>;
+export type URLStateType = Map<string, string | string[]>;
 
 const separator = ",";
 
